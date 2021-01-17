@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "rabot";
+}
+
+<h2>Работы</h2>
+<div>
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>Модель оборудования</td>
+            <td>Вид работы</td>
+            <td>Дата получение</td>
+            <td>Дата выполнения</td>
+            <td>Цена</td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td></td>
+                <td></td>
+            }
+        </tr>
+        @foreach (var a in ViewBag.Rabot)
+        {
+            <tr>
+                <td>@a.Id</td>
+                <td>@a.Oboryd.Model_oboryd</td>
+                <td>@a.Vid_rabot.Name_vid_rabot</td>
+                <td>@a.Data_polychen</td>
+                <td>@a.Data_vipolnen</td>
+                <td>@a.Vid_rabot.Cost_vid_rabot</td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td> @Html.ActionLink("Редактировать", "rabot_edit", new { Id = a.Id }) </td>
+                    <td>@Html.ActionLink("Удалить", "rabot_delete", new { Id = a.Id }) </td>
+                }
+            </tr>
+        }
+    </table>
+    <br />
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Добавить", "rabot_add")
+    }
+</div>

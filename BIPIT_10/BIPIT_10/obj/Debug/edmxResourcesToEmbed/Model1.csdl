@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="бипит3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Oboryd">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Firma_oboryd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Model_oboryd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Rabot" Relationship="Self.FK_Rabot_Oboryd" FromRole="Oboryd" ToRole="Rabot" />
+  </EntityType>
+  <EntityType Name="Rabot">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_oboryd" Type="Int32" />
+    <Property Name="ID_vid_rabot" Type="Int32" />
+    <Property Name="Data_polychen" Type="DateTime" Precision="0" />
+    <Property Name="Data_vipolnen" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Oboryd" Relationship="Self.FK_Rabot_Oboryd" FromRole="Rabot" ToRole="Oboryd" />
+    <NavigationProperty Name="Vid_rabot" Relationship="Self.FK_Rabot_Vid_rabot" FromRole="Rabot" ToRole="Vid_rabot" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Vid_rabot">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name_vid_rabot" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Plan_vid_rabot" Type="Int32" />
+    <Property Name="Cost_vid_rabot" Type="Int32" />
+    <NavigationProperty Name="Rabot" Relationship="Self.FK_Rabot_Vid_rabot" FromRole="Vid_rabot" ToRole="Rabot" />
+  </EntityType>
+  <Association Name="FK_Rabot_Oboryd">
+    <End Role="Oboryd" Type="Self.Oboryd" Multiplicity="0..1" />
+    <End Role="Rabot" Type="Self.Rabot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Oboryd">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rabot">
+        <PropertyRef Name="ID_oboryd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rabot_Vid_rabot">
+    <End Role="Vid_rabot" Type="Self.Vid_rabot" Multiplicity="0..1" />
+    <End Role="Rabot" Type="Self.Rabot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vid_rabot">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rabot">
+        <PropertyRef Name="ID_vid_rabot" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="бипит3Entities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Oboryd" EntityType="Self.Oboryd" />
+    <EntitySet Name="Rabot" EntityType="Self.Rabot" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Vid_rabot" EntityType="Self.Vid_rabot" />
+    <AssociationSet Name="FK_Rabot_Oboryd" Association="Self.FK_Rabot_Oboryd">
+      <End Role="Oboryd" EntitySet="Oboryd" />
+      <End Role="Rabot" EntitySet="Rabot" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rabot_Vid_rabot" Association="Self.FK_Rabot_Vid_rabot">
+      <End Role="Vid_rabot" EntitySet="Vid_rabot" />
+      <End Role="Rabot" EntitySet="Rabot" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище бипит3Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Oboryd">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Firma_oboryd" Type="varchar" MaxLength="50" />
+          <Property Name="Model_oboryd" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Rabot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_oboryd" Type="int" />
+          <Property Name="ID_vid_rabot" Type="int" />
+          <Property Name="Data_polychen" Type="date" />
+          <Property Name="Data_vipolnen" Type="date" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Vid_rabot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_vid_rabot" Type="varchar" MaxLength="50" />
+          <Property Name="Plan_vid_rabot" Type="int" />
+          <Property Name="Cost_vid_rabot" Type="int" />
+        </EntityType>
+        <Association Name="FK_Rabot_Oboryd">
+          <End Role="Oboryd" Type="Self.Oboryd" Multiplicity="0..1" />
+          <End Role="Rabot" Type="Self.Rabot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oboryd">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rabot">
+              <PropertyRef Name="ID_oboryd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rabot_Vid_rabot">
+          <End Role="Vid_rabot" Type="Self.Vid_rabot" Multiplicity="0..1" />
+          <End Role="Rabot" Type="Self.Rabot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vid_rabot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rabot">
+              <PropertyRef Name="ID_vid_rabot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище бипит3ModelContainer">
+          <EntitySet Name="Oboryd" EntityType="Self.Oboryd" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rabot" EntityType="Self.Rabot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vid_rabot" EntityType="Self.Vid_rabot" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Rabot_Oboryd" Association="Self.FK_Rabot_Oboryd">
+            <End Role="Oboryd" EntitySet="Oboryd" />
+            <End Role="Rabot" EntitySet="Rabot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rabot_Vid_rabot" Association="Self.FK_Rabot_Vid_rabot">
+            <End Role="Vid_rabot" EntitySet="Vid_rabot" />
+            <End Role="Rabot" EntitySet="Rabot" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="бипит3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Oboryd">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Firma_oboryd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Model_oboryd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Rabot" Relationship="Self.FK_Rabot_Oboryd" FromRole="Oboryd" ToRole="Rabot" />
+        </EntityType>
+        <EntityType Name="Rabot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_oboryd" Type="Int32" />
+          <Property Name="ID_vid_rabot" Type="Int32" />
+          <Property Name="Data_polychen" Type="DateTime" Precision="0" />
+          <Property Name="Data_vipolnen" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Oboryd" Relationship="Self.FK_Rabot_Oboryd" FromRole="Rabot" ToRole="Oboryd" />
+          <NavigationProperty Name="Vid_rabot" Relationship="Self.FK_Rabot_Vid_rabot" FromRole="Rabot" ToRole="Vid_rabot" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Vid_rabot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_vid_rabot" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Plan_vid_rabot" Type="Int32" />
+          <Property Name="Cost_vid_rabot" Type="Int32" />
+          <NavigationProperty Name="Rabot" Relationship="Self.FK_Rabot_Vid_rabot" FromRole="Vid_rabot" ToRole="Rabot" />
+        </EntityType>
+        <Association Name="FK_Rabot_Oboryd">
+          <End Role="Oboryd" Type="Self.Oboryd" Multiplicity="0..1" />
+          <End Role="Rabot" Type="Self.Rabot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oboryd">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rabot">
+              <PropertyRef Name="ID_oboryd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rabot_Vid_rabot">
+          <End Role="Vid_rabot" Type="Self.Vid_rabot" Multiplicity="0..1" />
+          <End Role="Rabot" Type="Self.Rabot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vid_rabot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rabot">
+              <PropertyRef Name="ID_vid_rabot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="бипит3Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Oboryd" EntityType="Self.Oboryd" />
+          <EntitySet Name="Rabot" EntityType="Self.Rabot" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Vid_rabot" EntityType="Self.Vid_rabot" />
+          <AssociationSet Name="FK_Rabot_Oboryd" Association="Self.FK_Rabot_Oboryd">
+            <End Role="Oboryd" EntitySet="Oboryd" />
+            <End Role="Rabot" EntitySet="Rabot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rabot_Vid_rabot" Association="Self.FK_Rabot_Vid_rabot">
+            <End Role="Vid_rabot" EntitySet="Vid_rabot" />
+            <End Role="Rabot" EntitySet="Rabot" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище бипит3ModelContainer" CdmEntityContainer="бипит3Entities1">
+          <EntitySetMapping Name="Oboryd">
+            <EntityTypeMapping TypeName="бипит3Model.Oboryd">
+              <MappingFragment StoreEntitySet="Oboryd">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Firma_oboryd" ColumnName="Firma_oboryd" />
+                <ScalarProperty Name="Model_oboryd" ColumnName="Model_oboryd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rabot">
+            <EntityTypeMapping TypeName="бипит3Model.Rabot">
+              <MappingFragment StoreEntitySet="Rabot">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ID_oboryd" ColumnName="ID_oboryd" />
+                <ScalarProperty Name="ID_vid_rabot" ColumnName="ID_vid_rabot" />
+                <ScalarProperty Name="Data_polychen" ColumnName="Data_polychen" />
+                <ScalarProperty Name="Data_vipolnen" ColumnName="Data_vipolnen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="бипит3Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vid_rabot">
+            <EntityTypeMapping TypeName="бипит3Model.Vid_rabot">
+              <MappingFragment StoreEntitySet="Vid_rabot">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_vid_rabot" ColumnName="Name_vid_rabot" />
+                <ScalarProperty Name="Plan_vid_rabot" ColumnName="Plan_vid_rabot" />
+                <ScalarProperty Name="Cost_vid_rabot" ColumnName="Cost_vid_rabot" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

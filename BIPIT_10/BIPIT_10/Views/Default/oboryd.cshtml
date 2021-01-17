@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "oboryd";
+}
+
+<h2>Оборудование</h2>
+<div>
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>Модель оборудования</td>
+            <td>Фирма оборудование</td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td></td>
+                <td></td>
+            }
+        </tr>
+        @foreach (var s in ViewBag.Oboryd)
+        {
+            <tr>
+                <td>@s.Id</td>
+                <td>@s.Model_oboryd</td>
+                <td>@s.Firma_oboryd</td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td> @Html.ActionLink("Редактировать", "oboryd_edit", new { Id = s.Id }) </td>
+                    <td>@Html.ActionLink("Удалить", "oboryd_delete", new { Id = s.Id }) </td>
+                }
+            </tr>
+        }
+    </table>
+    <br />
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Добавить", "oboryd_add")
+    }
+</div>

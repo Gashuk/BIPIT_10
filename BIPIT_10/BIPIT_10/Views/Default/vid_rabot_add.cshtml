@@ -1,0 +1,25 @@
+﻿@model Vid_rabot
+@{
+    ViewBag.Title = "vid_rabot_add";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        @Html.LabelFor(model => model.Name_vid_rabot, "Название работы")
+        <br />
+        @Html.EditorFor(model => model.Name_vid_rabot)
+        <br />
+        @Html.LabelFor(model => model.Cost_vid_rabot, "Цена работы")
+        <br />
+        @Html.EditorFor(model => model.Cost_vid_rabot)
+        <br />
+        <br />
+        <input type="submit" value="Добавить" />
+    </fieldset>
+}
+
+
+

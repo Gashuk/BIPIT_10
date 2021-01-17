@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище бипит3ModelContainer" CdmEntityContainer="бипит3Entities1">
+    <EntitySetMapping Name="Oboryd">
+      <EntityTypeMapping TypeName="бипит3Model.Oboryd">
+        <MappingFragment StoreEntitySet="Oboryd">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Firma_oboryd" ColumnName="Firma_oboryd" />
+          <ScalarProperty Name="Model_oboryd" ColumnName="Model_oboryd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rabot">
+      <EntityTypeMapping TypeName="бипит3Model.Rabot">
+        <MappingFragment StoreEntitySet="Rabot">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID_oboryd" ColumnName="ID_oboryd" />
+          <ScalarProperty Name="ID_vid_rabot" ColumnName="ID_vid_rabot" />
+          <ScalarProperty Name="Data_polychen" ColumnName="Data_polychen" />
+          <ScalarProperty Name="Data_vipolnen" ColumnName="Data_vipolnen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="бипит3Model.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vid_rabot">
+      <EntityTypeMapping TypeName="бипит3Model.Vid_rabot">
+        <MappingFragment StoreEntitySet="Vid_rabot">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name_vid_rabot" ColumnName="Name_vid_rabot" />
+          <ScalarProperty Name="Plan_vid_rabot" ColumnName="Plan_vid_rabot" />
+          <ScalarProperty Name="Cost_vid_rabot" ColumnName="Cost_vid_rabot" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

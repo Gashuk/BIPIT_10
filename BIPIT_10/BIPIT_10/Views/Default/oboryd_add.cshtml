@@ -1,0 +1,21 @@
+﻿@model Oboryd
+@{
+    ViewBag.Title = "oboryd_add";
+}
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        @Html.LabelFor(model => model.Model_oboryd, "Модель оборудования")
+        <br />
+        @Html.EditorFor(model => model.Model_oboryd)
+        <br />
+        @Html.LabelFor(model => model.Firma_oboryd, "Фирма оборудование")
+        <br />
+        @Html.EditorFor(model => model.Firma_oboryd)
+        <br />
+        <br />
+        <input type="submit" value="Добавить" />
+    </fieldset>
+}
+

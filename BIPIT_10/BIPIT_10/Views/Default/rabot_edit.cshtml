@@ -1,0 +1,31 @@
+﻿@model Rabot
+@{
+    ViewBag.Title = "rabot_edit";
+}
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        @Html.HiddenFor(m => m.Id)
+        <p>
+            @Html.LabelFor(model => model.Oboryd.Model_oboryd, "Модель оборудования")
+            <br />
+            @Html.DropDownListFor(model => model.ID_oboryd, ViewBag.Oboryd as SelectList)
+            <br />
+            @Html.LabelFor(model => model.Vid_rabot.Name_vid_rabot, "Вид работы")
+            <br />
+            @Html.DropDownListFor(model => model.ID_vid_rabot, ViewBag.Vid_rabot as SelectList)
+            <br />
+            @Html.LabelFor(model => model.Data_polychen, "Дата получение")
+            <br />
+            @Html.EditorFor(model => model.Data_polychen)
+            <br />
+            @Html.LabelFor(model => model.Data_vipolnen, "Дата выполнения")
+            <br />
+            @Html.EditorFor(model => model.Data_vipolnen)
+            <br />
+        </p>
+        <p><input type="submit" value="Редактировать" /></p>
+    </fieldset>
+}
+
